@@ -68,14 +68,14 @@ public class TeacherDAO extends AbstractDataAccessObject{
         }
     }
 
-    public List<Teacher> findById(String id) {
+    public Teacher findById(String id) {
         try(Connection conn = getConnection();
             PreparedStatement pstmt =
                     conn.prepareStatement(getQuery("find_teacher_by_id"));
         ){
             pstmt.setString(1, id);
 
-            return rsReader(pstmt.executeQuery());
+            return (Teacher) rsReader(pstmt.executeQuery()).get(0);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

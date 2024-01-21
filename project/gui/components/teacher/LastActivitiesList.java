@@ -34,7 +34,7 @@ public class LastActivitiesList extends JFrame implements HeadedFrame {
         super();
         setLayout(new GridBagLayout());
 
-        this.teacher = new TeacherDAO().findById(teacherID).get(0);
+        this.teacher = new TeacherDAO().findById(teacherID);
         this.classID = selectedClass;
 
         setTitle("%s %s - Last activities".formatted(teacher.getCognome(), teacher.getNome()));

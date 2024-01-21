@@ -37,4 +37,13 @@ public class ClassDAO extends AbstractDataAccessObject<project.database.objects.
             throw new RuntimeException(e);
         }
     }
+
+    public project.database.objects.Class getClassID(String classID) {
+        try(Connection conn = getConnection(); PreparedStatement prsmt = conn.prepareStatement(getQuery("get_class_by_id"));) {
+            prsmt.setString(1, classID);
+            return rsReader(prsmt.executeQuery()).get(0);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -91,7 +91,7 @@ public class AllStudentEvent extends JFrame implements HeadedFrame {
 
                 singleEventPan.setBackground(new Color(242,242,242));
 
-                Teacher tc = new TeacherDAO().findById(aet.getTeacherId()).get(0);
+                Teacher tc = new TeacherDAO().findById(aet.getTeacherId());
 
                 JLabel event = new JLabel("%s".formatted(aet.getTipo().toUpperCase()));
                 event.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));

@@ -32,7 +32,7 @@ public class DashboardTeacher extends RoundedPanel {
         super(gbl);
 
 
-        this.teacher = new TeacherDAO().findById(JFrame.getFrames()[1].getTitle().substring(1, 5)).get(0);
+        this.teacher = new TeacherDAO().findById(JFrame.getFrames()[1].getTitle().substring(1, 5));
         this.selectedClassId = selectedClassId;
 
 
@@ -543,7 +543,7 @@ public class DashboardTeacher extends RoundedPanel {
         profilePan.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                TeacherProfile profile = new TeacherProfile(new TeacherDAO().findById(teacher.getMatricola()).get(0));
+                TeacherProfile profile = new TeacherProfile(new TeacherDAO().findById(teacher.getMatricola()));
 
                 addWindowsListenerToNewFrane(profile);
             }
@@ -573,7 +573,7 @@ public class DashboardTeacher extends RoundedPanel {
     }
 
     private void addLessionRecap(JPanel pan) {
-        ImageAdder imgLabel = new ImageAdder("assets/notebook-pen.png");
+        ImageAdder imgLabel = new ImageAdder("assets/presentation.png");
 
         JPanel panel = new RoundedPanel(new BorderLayout(20, 20));
         panel.add(imgLabel, BorderLayout.WEST);
@@ -586,9 +586,9 @@ public class DashboardTeacher extends RoundedPanel {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                LastActivitiesList lst = new LastActivitiesList(teacher.getMatricola(), selectedClassId);
+                LessionMenu lsm = new LessionMenu(teacher, selectedClassId);
 
-                addWindowsListenerToNewFrane(lst);
+                addWindowsListenerToNewFrane(lsm);
             }
 
             @Override
@@ -669,6 +669,7 @@ public class DashboardTeacher extends RoundedPanel {
 
             @Override
             public void windowClosing(WindowEvent e) {
+                f.dispose();
                 setEnabled(true);
             }
 

@@ -196,7 +196,7 @@ public class StudentSide extends JFrame {
                 date.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));
                 date.setForeground(Color.GRAY);
 
-                Teacher tc = new TeacherDAO().findById(ae.getTeacherId()).get(0);
+                Teacher tc = new TeacherDAO().findById(ae.getTeacherId());
 
                 JLabel teacher = new JLabel("(added by %s %s)".formatted(tc.getCognome(), tc.getNome()));
                 teacher.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 14));

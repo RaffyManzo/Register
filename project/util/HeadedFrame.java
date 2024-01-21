@@ -11,6 +11,12 @@ public interface HeadedFrame {
 
     GridBagConstraints gb = new GridBagConstraints();
 
+    /***
+     * Add an head referred to student to your Container using GridBagConstraint.
+     * After this start with gridy = 4
+     * @param c
+     */
+
     default void addInfoHead(Container c) {
         ImageAdder img = new ImageAdder();
         img.setImage("assets/logotagliato.png");
@@ -55,6 +61,12 @@ public interface HeadedFrame {
         c.add(studentInfoPan, gb);
     }
 
+    /***
+     * Add an head to your Container using GridBagConstraint.
+     * After this start with gridy = 2
+     * @param c
+     * @param txt write a string before name and surname space.
+     */
     default void addInfoHead(Container c, String txt) {
         ImageAdder img = new ImageAdder();
         img.setImage("assets/logotagliato.png");
