@@ -1,11 +1,8 @@
 package project.gui.components.teacher;
 
-import javax.swing.*;
-import java.sql.Date;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-public enum LessionHour {
+public enum LessonHour {
     FIRST(1),
     SECOND(2),
     THIRD(3),
@@ -17,12 +14,12 @@ public enum LessionHour {
 
     private int value;
 
-    LessionHour(int value) {
+    LessonHour(int value) {
         this.value = value;
     }
 
 
-    public static LessionHour getHourByTime() throws Exception {
+    public static LessonHour getHourByTime() throws Exception {
         Calendar c = Calendar.getInstance();
 
          class BadHourException extends Exception {

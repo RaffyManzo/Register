@@ -1,16 +1,15 @@
 package project.gui.components.teacher;
 
 import project.database.ClassDAO;
-import project.database.LessionDAO;
+import project.database.LessonDAO;
 import project.database.StudentDAO;
 import project.database.TeacherDAO;
 import project.database.objects.Class;
-import project.database.objects.Lession;
+import project.database.objects.Lesson;
 import project.database.objects.Student;
 import project.database.objects.Teacher;
 import project.gui.components.rounded.RoundedLabel;
 import project.gui.components.rounded.RoundedPanel;
-import project.gui.components.rounded.RoundedScrollPane;
 import project.util.HeadedFrame;
 import project.util.ImageAdder;
 
@@ -19,33 +18,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class LessionMenu extends JFrame implements HeadedFrame {
+public class LessonMenu extends JFrame implements HeadedFrame {
 
     private Teacher teacher;
     private String selectedClass;
-    private JPanel lessionPan;
-    private LessionHour current;
+    private JPanel LessonPan;
+    private LessonHour current;
 
-    public LessionMenu(Teacher teacher, String selectedClass) {
+    public LessonMenu(Teacher teacher, String selectedClass) {
         super();
         this.teacher = teacher;
         this.selectedClass = selectedClass;
         current = null;
         try {
-            current = LessionHour.getHourByTime();
+            current = LessonHour.getHourByTime();
         } catch(Exception e) {
 
             JOptionPane.showMessageDialog(this,
                     "Check the current hour.",
-                    "Invalid lession hour",
+                    "Invalid Lesson hour",
                     JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
         }
-            setTitle("%s %s - Current Lession".formatted(teacher.getCognome(), teacher.getNome()));
+            setTitle("%s %s - Current Lesson".formatted(teacher.getCognome(), teacher.getNome()));
             setResizable(false);
             setVisible(true);
             setMinimumSize(new Dimension(900, 800));
@@ -69,7 +67,7 @@ public class LessionMenu extends JFrame implements HeadedFrame {
 
             ImageAdder img = new ImageAdder("assets/message-square-warning.png");
             advPan.add(img, BorderLayout.WEST);
-            JLabel alertMessage = new JLabel("Firm before to see the lession info. The page was opened according to the current time.");
+            JLabel alertMessage = new JLabel("Firm before to see the Lesson info. The page was opened according to the current time.");
             alertMessage.setForeground(new Color(51,51,51));
             alertMessage.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 18));
             advPan.add(alertMessage, BorderLayout.CENTER);
@@ -85,11 +83,11 @@ public class LessionMenu extends JFrame implements HeadedFrame {
             add(advPan, gb);
 
 
-            lessionPan = new RoundedPanel(new GridBagLayout());
-            lessionPan.setBackground(new Color(220,220,220));
+            LessonPan = new RoundedPanel(new GridBagLayout());
+            LessonPan.setBackground(new Color(220,220,220));
             if(current != null)
-                if(!(new LessionDAO().getCurrentLession(current.getValue(), selectedClass, teacher.getMatricola()).isEmpty()))
-                    addLessionInfo();
+                if(!(new LessonDAO().getCurrentLesson(current.getValue(), selectedClass, teacher.getMatricola()).isEmpty()))
+                    addLessonInfo();
 
             gb.gridy = 3;
             gb.gridx = 0;
@@ -100,7 +98,7 @@ public class LessionMenu extends JFrame implements HeadedFrame {
             gb.gridwidth = 2;
             gb.insets = new Insets(10,10,0,10);
 
-            add(lessionPan, gb);
+            add(LessonPan, gb);
 
             gb.gridy = 4;
             gb.gridx = 0;
@@ -130,30 +128,30 @@ public class LessionMenu extends JFrame implements HeadedFrame {
     }
 
     private void addHourComboBox(JPanel pan) {
-        JComboBox<LessionHour> hour = new JComboBox<>();
+        JComboBox<LessonHour> hour = new JComboBox<>();
         hour.setBackground(new Color(242, 242, 242));
         hour.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(),
                 BorderFactory.createLineBorder(new Color(242, 242, 242), 0)));
         hour.setSelectedItem(current != null ? current : null);
 
-        hour.addItem(LessionHour.FIRST);
-        hour.addItem(LessionHour.SECOND);
-        hour.addItem(LessionHour.THIRD);
-        hour.addItem(LessionHour.FOURTH);
-        hour.addItem(LessionHour.FIFTH);
-        hour.addItem(LessionHour.SIXTH);
-        hour.addItem(LessionHour.SEVENTH);
-        hour.addItem(LessionHour.EIGHTH);
+        hour.addItem(LessonHour.FIRST);
+        hour.addItem(LessonHour.SECOND);
+        hour.addItem(LessonHour.THIRD);
+        hour.addItem(LessonHour.FOURTH);
+        hour.addItem(LessonHour.FIFTH);
+        hour.addItem(LessonHour.SIXTH);
+        hour.addItem(LessonHour.SEVENTH);
+        hour.addItem(LessonHour.EIGHTH);
 
         hour.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    current = (LessionHour) hour.getSelectedItem();
-                    lessionPan.removeAll();
-                    if(!(new LessionDAO().getCurrentLession(current.getValue(), selectedClass, teacher.getMatricola()).isEmpty()))
-                        addLessionInfo();
-                    SwingUtilities.updateComponentTreeUI(lessionPan);
+                    current = (LessonHour) hour.getSelectedItem();
+                    LessonPan.removeAll();
+                    if(!(new LessonDAO().getCurrentLesson(current.getValue(), selectedClass, teacher.getMatricola()).isEmpty()))
+                        addLessonInfo();
+                    SwingUtilities.updateComponentTreeUI(LessonPan);
                 }
             }
         });
@@ -161,15 +159,15 @@ public class LessionMenu extends JFrame implements HeadedFrame {
         pan.add(hour);
     }
 
-    private void addLessionInfo() {
+    private void addLessonInfo() {
         JPanel attendanceList = new RoundedPanel(new GridBagLayout());
         //attendanceList.setBorder(BorderFactory.createEmptyBorder());
         attendanceList.setBackground(new Color(230,230,230));
         addHead("Present today", attendanceList);
 
-        JPanel lessionInfo = new RoundedPanel(new GridBagLayout());
-        lessionInfo.setBackground(new Color(230,230,230));
-        addHead("Lession info", lessionInfo);
+        JPanel LessonInfo = new RoundedPanel(new GridBagLayout());
+        LessonInfo.setBackground(new Color(230,230,230));
+        addHead("Lesson info", LessonInfo);
 
 
         JScrollPane scrollPane = new JScrollPane();
@@ -197,8 +195,8 @@ public class LessionMenu extends JFrame implements HeadedFrame {
         gb.fill = GridBagConstraints.HORIZONTAL;
         gb.insets = new Insets(5,5,5,5);
 
-        lessionPan.add(lessionInfo, gb);
-        addLessionInfo(lessionInfo);
+        LessonPan.add(LessonInfo, gb);
+        addLessonInfo(LessonInfo);
 
         gb.gridy = 0;
         gb.weighty = 1;
@@ -207,10 +205,10 @@ public class LessionMenu extends JFrame implements HeadedFrame {
         gb.fill = GridBagConstraints.BOTH;
         gb.insets = new Insets(5,5,5,5);
 
-        lessionPan.add(attendanceList, gb);
+        LessonPan.add(attendanceList, gb);
     }
 
-    private void addLessionInfo(JPanel lessionPan) {
+    private void addLessonInfo(JPanel LessonPan) {
         JLabel hour = new RoundedLabel("Ora: %d°".formatted(current.getValue()));
         hour.setBackground(new Color(242, 242, 242));
 
@@ -222,26 +220,26 @@ public class LessionMenu extends JFrame implements HeadedFrame {
         gb.anchor = GridBagConstraints.PAGE_START;
         gb.insets = new Insets(5, 5, 5, 5);
 
-        lessionPan.add(hour, gb);
+        LessonPan.add(hour, gb);
 
         Class c = new ClassDAO().getClassID(selectedClass);
         JLabel classLabel = new RoundedLabel("Class: %s %s - %s".formatted(c.getNumero(), c.getSezione(), c.getIndirizzo()));
         classLabel.setBackground(new Color(242, 242, 242));
 
         gb.gridy = 2;
-        lessionPan.add(classLabel, gb);
+        LessonPan.add(classLabel, gb);
 
         JLabel teacherLabel = new RoundedLabel("Teacher: %s %s".formatted(teacher.getCognome(), teacher.getNome()));
         teacherLabel.setBackground(new Color(242, 242, 242));
 
         gb.gridy = 3;
-        lessionPan.add(teacherLabel, gb);
+        LessonPan.add(teacherLabel, gb);
 
         JLabel subject = new RoundedLabel("Subject: %s ".formatted(new TeacherDAO().getSubjectFromId(teacher.getMatricola())));
         subject.setBackground(new Color(242, 242, 242));
 
         gb.gridy = 4;
-        lessionPan.add(subject, gb);
+        LessonPan.add(subject, gb);
     }
 
     private void addStudentsList(JScrollPane scrollPane) {
@@ -331,7 +329,7 @@ public class LessionMenu extends JFrame implements HeadedFrame {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                removeLession();
+                removeLesson();
             }
 
             @Override
@@ -405,19 +403,25 @@ public class LessionMenu extends JFrame implements HeadedFrame {
 
     private void firmAction()  {
         int hour = current.getValue();
-        new LessionDAO().removeByAtt(hour, selectedClass, teacher.getMatricola());
-        new LessionDAO().insertInto(new Lession(hour, selectedClass, teacher.getMatricola()));
-        lessionPan.removeAll();
-        addLessionInfo();
-        SwingUtilities.updateComponentTreeUI(lessionPan);
-
+        if(!new LessonDAO().alreadyExixt(current.getValue(), teacher.getMatricola(), selectedClass)) {
+            new LessonDAO().removeByAtt(hour, selectedClass, teacher.getMatricola());
+            new LessonDAO().insertInto(new Lesson(hour, selectedClass, teacher.getMatricola()));
+            LessonPan.removeAll();
+            addLessonInfo();
+            SwingUtilities.updateComponentTreeUI(LessonPan);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Exists another Lesson in another class at this hour in this day.\nDelete it before firm in this class",
+                    "Another Lesson",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    private void removeLession() {
+    private void removeLesson() {
         int hour = current.getValue();
-        new LessionDAO().removeByAtt(hour, selectedClass, teacher.getMatricola());
-        lessionPan.removeAll();
-        SwingUtilities.updateComponentTreeUI(lessionPan);
+        new LessonDAO().removeByAtt(hour, selectedClass, teacher.getMatricola());
+        LessonPan.removeAll();
+        SwingUtilities.updateComponentTreeUI(LessonPan);
     }
 
     private void addPointerUpdate(JPanel panel) {

@@ -2,14 +2,14 @@ package project.database.objects;
 
 import java.sql.Date;
 
-public class Lession {
+public class Lesson {
     private int id;
     private java.sql.Date data;
     private int ora;
     private String classId;
     private String teahcerId;
 
-    public Lession(int id, Date data, int ora, String classId, String teahcerId) {
+    public Lesson(int id, Date data, int ora, String classId, String teahcerId) {
         this.id = id;
         this.data = data;
         this.ora = ora;
@@ -17,7 +17,7 @@ public class Lession {
         this.teahcerId = teahcerId;
     }
 
-    public Lession(int ora, String classId, String teahcerId) {
+    public Lesson(int ora, String classId, String teahcerId) {
         this.ora = ora;
         this.classId = classId;
         this.teahcerId = teahcerId;

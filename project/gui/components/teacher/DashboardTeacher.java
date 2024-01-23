@@ -12,12 +12,9 @@ import project.util.ImageAdder;
 import project.util.Type;
 import project.gui.components.rounded.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
@@ -47,7 +44,7 @@ public class DashboardTeacher extends RoundedPanel {
         buttonsPan.setBackground(getBackground());
         addProfileBtn(buttonsPan);
         addActivitiesList(buttonsPan);
-        addLessionRecap(buttonsPan);
+        addLessonRecap(buttonsPan);
 
 
         gb.gridy = 1;
@@ -572,12 +569,12 @@ public class DashboardTeacher extends RoundedPanel {
         pan.add(profilePan);
     }
 
-    private void addLessionRecap(JPanel pan) {
+    private void addLessonRecap(JPanel pan) {
         ImageAdder imgLabel = new ImageAdder("assets/presentation.png");
 
         JPanel panel = new RoundedPanel(new BorderLayout(20, 20));
         panel.add(imgLabel, BorderLayout.WEST);
-        JLabel label = new JLabel("<HTML><BODY><u>Today Lession</u></BODY></HTML>".toUpperCase());
+        JLabel label = new JLabel("<HTML><BODY><u>Today Lesson</u></BODY></HTML>".toUpperCase());
         label.setForeground(new Color(242,242,242));
         label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         panel.add(label);
@@ -586,7 +583,7 @@ public class DashboardTeacher extends RoundedPanel {
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                LessionMenu lsm = new LessionMenu(teacher, selectedClassId);
+                LessonMenu lsm = new LessonMenu(teacher, selectedClassId);
 
                 addWindowsListenerToNewFrane(lsm);
             }

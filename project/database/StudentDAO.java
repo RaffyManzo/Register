@@ -62,7 +62,7 @@ public class StudentDAO extends AbstractDataAccessObject{
 
 
     public List<Student> getPresentToday(String classID, int hour) {
-        try(Connection conn = getConnection(); PreparedStatement cl = conn.prepareStatement(getQuery("get_class_lession_student"));) {
+        try(Connection conn = getConnection(); PreparedStatement cl = conn.prepareStatement(getQuery("get_class_lesson_student"));) {
             cl.setInt(2, hour);
             cl.setString(1, classID);
             return rsReader(cl.executeQuery());
