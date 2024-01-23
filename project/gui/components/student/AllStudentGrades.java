@@ -59,7 +59,7 @@ public class AllStudentGrades extends JFrame implements HeadedFrame {
     }
 
     private void addGradePanel() {
-        JPanel masterGradesPanel = new RoundedPanel(new GridBagLayout());
+        JPanel masterGradesPanel = new JPanel(new GridBagLayout());
         masterGradesPanel.setBackground(getBackground());
         addHead(masterGradesPanel, "All grades");
 
@@ -138,7 +138,7 @@ public class AllStudentGrades extends JFrame implements HeadedFrame {
         scrollPane.setViewportView(gradesPanel);
 
         gb.gridy = 1;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.anchor = GridBagConstraints.PAGE_START;
         gb.fill = GridBagConstraints.BOTH;
         gb.weighty = 1;
@@ -154,7 +154,6 @@ public class AllStudentGrades extends JFrame implements HeadedFrame {
         gb.fill = GridBagConstraints.BOTH;
         gb.weighty = 1;
         gb.weightx = 1;
-        gb.gridwidth = 3;
         gb.insets = new Insets(5,5,5,5);
         add(masterGradesPanel,gb);
 
@@ -171,12 +170,11 @@ public class AllStudentGrades extends JFrame implements HeadedFrame {
         defineAvgLabel(new GradeDAO().getAvg(student.getMatricola()), avgsPanel, "Generale");
 
         gb.gridy = 3;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.anchor = GridBagConstraints.PAGE_START;
         gb.fill = GridBagConstraints.HORIZONTAL;
         gb.weighty = 0.1;
         gb.weightx = 1;
-        gb.gridwidth = 3;
         gb.insets = new Insets(5,20,5,20);
 
         add(avgsPanel, gb);

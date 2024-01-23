@@ -59,7 +59,7 @@ public class AllStudentEvent extends JFrame implements HeadedFrame {
     }
 
     private void addEventsPanel() {
-        JPanel masterEventsPanel = new RoundedPanel(new GridBagLayout());
+        JPanel masterEventsPanel = new JPanel(new GridBagLayout());
         masterEventsPanel.setBackground(getBackground());
         addHead(masterEventsPanel, "All events");
 
@@ -129,7 +129,7 @@ public class AllStudentEvent extends JFrame implements HeadedFrame {
         scrollPane.setViewportView(eventsPanel);
 
         gb.gridy = 1;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.anchor = GridBagConstraints.PAGE_START;
         gb.fill = GridBagConstraints.BOTH;
         gb.weighty = 1;
@@ -169,7 +169,7 @@ public class AllStudentEvent extends JFrame implements HeadedFrame {
                 project.util.Type.ENTRATA);
 
         gb.gridy = 3;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.anchor = GridBagConstraints.PAGE_START;
         gb.fill = GridBagConstraints.HORIZONTAL;
         gb.weighty = 0.1;
