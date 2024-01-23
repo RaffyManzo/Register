@@ -357,7 +357,7 @@ public class DashboardTeacher extends RoundedPanel {
             }
 
             private void addHead() {
-                head = new RoundedLabel("Insert a events");
+                head = new RoundedLabel("Insert an events");
                 head.setBackground(new Color(155,81,224));
 
                 head.setForeground(new Color(242,242,242));
