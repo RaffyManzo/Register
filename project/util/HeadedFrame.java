@@ -22,7 +22,7 @@ public interface HeadedFrame {
         img.setImage("assets/logotagliato.png");
 
         gb.gridy = 0;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.weighty = 0.01;
         gb.weightx = 1;
         gb.anchor = GridBagConstraints.PAGE_START;
@@ -52,7 +52,7 @@ public interface HeadedFrame {
         studentInfoPan.add(classLabel, gb);
 
         gb.gridy = 1;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.weighty = 0.01;
         gb.weightx = 0.1;
         gb.anchor = GridBagConstraints.PAGE_START;
@@ -72,7 +72,7 @@ public interface HeadedFrame {
         img.setImage("assets/logotagliato.png");
 
         gb.gridy = 0;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.weighty = 0.01;
         gb.weightx = 1;
         gb.anchor = GridBagConstraints.PAGE_START;
@@ -92,7 +92,7 @@ public interface HeadedFrame {
         infoPan.add(registry, gb);
 
         gb.gridy = 1;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.weighty = 0.01;
         gb.weightx = 0.1;
         gb.anchor = GridBagConstraints.PAGE_START;

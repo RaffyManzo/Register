@@ -669,13 +669,12 @@ public class DashboardTeacher extends RoundedPanel {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                f.dispose();
                 setEnabled(true);
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
-
+                f.removeAll();
             }
 
             @Override

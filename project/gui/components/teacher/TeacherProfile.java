@@ -49,7 +49,7 @@ public class TeacherProfile extends JFrame implements Profile, HeadedFrame {
         addInfo(profileInfoPan);
 
         gb.gridy = 3;
-        gb.gridx = 1;
+        gb.gridx = 0;
         gb.weighty = 0.8;
         gb.weightx = 1;
         gb.anchor = GridBagConstraints.PAGE_START;
