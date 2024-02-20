@@ -37,7 +37,7 @@ public class DBManager {
 
 
     /**
-     * Create or return the instance of database manager
+     * Create or return the instance of database manager. Create it if not exists
      *
      * @return DBManager
      * @throws DBManagerException

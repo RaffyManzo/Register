@@ -23,7 +23,7 @@ public abstract class  AbstractDataAccessObject <T> {
     }
 
     /**
-     * Return the connection to database
+     * Return the connection to database.
      *
      * @return Connection
      * @throws SQLException
@@ -50,9 +50,9 @@ public abstract class  AbstractDataAccessObject <T> {
 
 
     /**
-     * Return a List of <T> element
+     * Return a List of <T> element.
      *
-     * @param rs Result set, the result of an executed querty
+     * @param rs Result set, the result of an executed query
      * @return List<T>
      * @throws SQLException
      */
@@ -73,6 +73,13 @@ public abstract class  AbstractDataAccessObject <T> {
         return dbManager.getQuery(queryId);
     }
 
+    /**
+     * Implemented by DAO classes. It's used to return the T object extracted from ResultSet
+     *
+     * @param rs A result set. Query's output
+     * @return T object
+     * @throws SQLException
+     */
     protected abstract T extractFromResultSet(ResultSet rs) throws SQLException;
     protected abstract void insertInto (T t) throws SQLException;
 }
