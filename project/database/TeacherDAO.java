@@ -42,7 +42,7 @@ public class TeacherDAO extends AbstractDataAccessObject{
     public String getSubjectFromId(String teacherID) {
         try(Connection conn = getConnection();
             PreparedStatement pstmt =
-                    conn.prepareStatement(getQuery("get_subject_from_teacher_id"));){
+                    conn.prepareStatement(getQuery("find_teacher_by_id"));){
             pstmt.setString(1, teacherID);
             List<Teacher> output = rsReader(pstmt.executeQuery());
 
@@ -61,6 +61,35 @@ public class TeacherDAO extends AbstractDataAccessObject{
                     conn.prepareStatement(getQuery("find_teacher_by_email"));
             ){
             pstmt.setString(1, email);
+
+            return rsReader(pstmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Teacher> exceptThisClass(String teacherID, String classID) {
+        try(Connection conn = getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(getQuery("not_same_class_lession"));
+        ){
+            pstmt.setString(1, teacherID);
+            pstmt.setString(2, teacherID);
+            pstmt.setString(3, classID);
+
+            return rsReader(pstmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Teacher> divisionForClassNumber(String teacherID, int classN) {
+        try(Connection conn = getConnection();
+            PreparedStatement pstmt =
+                    conn.prepareStatement(getQuery("all_class_firm_today"));
+        ){
+            pstmt.setString(1, teacherID);
+            pstmt.setInt(2, classN);
 
             return rsReader(pstmt.executeQuery());
         } catch (SQLException e) {

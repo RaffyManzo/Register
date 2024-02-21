@@ -46,4 +46,6 @@ public class ClassDAO extends AbstractDataAccessObject<project.database.objects.
             throw new RuntimeException(e);
         }
     }
+
+
 }

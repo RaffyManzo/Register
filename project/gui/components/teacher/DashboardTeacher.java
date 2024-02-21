@@ -40,11 +40,12 @@ public class DashboardTeacher extends RoundedPanel {
         insertEvents();
 
 
-        JPanel buttonsPan = new JPanel(new GridLayout(3, 1, 20, 20));
+        JPanel buttonsPan = new JPanel(new GridLayout(4, 1, 12, 12));
         buttonsPan.setBackground(getBackground());
         addProfileBtn(buttonsPan);
         addActivitiesList(buttonsPan);
         addLessonRecap(buttonsPan);
+        addOtherFeaturesBtn(buttonsPan);
 
 
         gb.gridy = 1;
@@ -54,7 +55,7 @@ public class DashboardTeacher extends RoundedPanel {
         gb.gridwidth = 1;
         gb.fill = GridBagConstraints.BOTH;
         gb.anchor = GridBagConstraints.CENTER;
-        gb.insets = new Insets(10, 10, 30, 10);
+        gb.insets = new Insets(10, 10, 20, 10);
 
         add(buttonsPan, gb);
 
@@ -543,6 +544,49 @@ public class DashboardTeacher extends RoundedPanel {
                 TeacherProfile profile = new TeacherProfile(new TeacherDAO().findById(teacher.getMatricola()));
 
                 addWindowsListenerToNewFrane(profile);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        profilePan.setBackground(new Color(155,81,224));
+        pan.add(profilePan);
+    }
+
+    private void addOtherFeaturesBtn(JPanel pan) {
+        ImageAdder imgLabel = new ImageAdder("assets/chart-img.png");
+
+        JPanel profilePan = new RoundedPanel(new BorderLayout(20, 20));
+        profilePan.add(imgLabel, BorderLayout.WEST);
+        JLabel label = new JLabel("<HTML><BODY><u>Other teacher info</u></BODY></HTML>".toUpperCase());
+        label.setForeground(new Color(242,242,242));
+        label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+        profilePan.add(label);
+
+        addPointerUpdate(profilePan);
+        profilePan.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                OtherFeatures ot = new OtherFeatures(selectedClassId, new TeacherDAO().findById(teacher.getMatricola()));
+
+                addWindowsListenerToNewFrane(ot);
             }
 
             @Override
